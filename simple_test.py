@@ -35,13 +35,14 @@ def get_file_stats(content: str) -> dict:
     clean_content_split = clean_content.split()
     
     if len(clean_content_split) == 0:
-        return {"character_count": 0, "word_count": 0, "unique_word_count": 0, "most_frequent_word": None, "frequency": 0}
+        return {"character_count": 0, "word_count": 0, "unique_word_count": 0, "most_frequent_word": None, "frequency": 0, "lowest_fre": 0}
     
     words_counter = Counter(clean_content_split)
     num_words = sum(words_counter.values())
     num_unique_words = len(words_counter)
     most_frequent = words_counter.most_common(1)
-    return {"character_count": len(clean_content), "word_count": num_words, "unique_word_count": num_unique_words, "most_frequent_word": most_frequent[0][0], "frequency": most_frequent[0][1]}
+    least_frequent = words_counter.most_common(1)
+    return {"character_count": len(clean_content), "word_count": num_words, "unique_word_count": num_unique_words, "most_frequent_word": most_frequent[0][0], "frequency": most_frequent[0][1], "least_frequent": -most_frequent[0][1]}
 
 
 if __name__ == "__main__":
