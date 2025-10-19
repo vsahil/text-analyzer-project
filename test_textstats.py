@@ -41,3 +41,9 @@ def test_analyze_text_normal_case():
     assert result["most_frequent_word"] == "hello"
     assert result["frequency"] == 2
 
+def test_analyze_text_character_count():
+    """Tests the character counting logic."""
+    text = "hi!" # 3 characters
+    result = get_file_stats(text)
+    assert result["character_count"] == 3
+    
