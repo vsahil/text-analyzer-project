@@ -31,16 +31,17 @@ def get_file_stats(content: str) -> dict:
 
     # Apply the translation to the string
     clean_content = content.translate(translator)
-    clean_content = clean_content.lower().split()
+    clean_content = clean_content.lower()
+    clean_content_split = clean_content.split()
     
-    if len(clean_content) == 0:
-        return {"word_count": 0, "unique_word_count": 0, "most_frequent_word": None, "frequency": 0}
+    if len(clean_content_split) == 0:
+        return {"character_count": 0, "word_count": 0, "unique_word_count": 0, "most_frequent_word": None, "frequency": 0}
     
-    words_counter = Counter(clean_content)
+    words_counter = Counter(clean_content_split)
     num_words = sum(words_counter.values())
     num_unique_words = len(words_counter)
     most_frequent = words_counter.most_common(1)
-    return {"word_count": num_words, "unique_word_count": num_unique_words, "most_frequent_word": most_frequent[0][0], "frequency": most_frequent[0][1]}
+    return {"character_count": len(clean_content), "word_count": num_words, "unique_word_count": num_unique_words, "most_frequent_word": most_frequent[0][0], "frequency": most_frequent[0][1]}
 
 
 if __name__ == "__main__":
@@ -52,6 +53,7 @@ if __name__ == "__main__":
     try:
         file_content = read_file(args.filename)
         stats = get_file_stats(file_content)
+        print(f"Total character count: {stats['character_count']}")
         print("Number of words in the file: ", stats["word_count"])
         print("Number of unique words in the file: ", stats["unique_word_count"])
         print("Most frequent word in the file: ", stats["most_frequent_word"])
