@@ -35,7 +35,7 @@ def get_file_stats(content: str) -> dict:
     clean_content_split = clean_content.split()
     
     if len(clean_content_split) == 0:
-        return {"character_count": 0, "word_count": 0, "unique_word_count": 0, "most_frequent_word": None, "frequency": 0, "lowest_fre": 0}
+        return {"character_count": 0, "word_count": 0, "unique_word_count": 0, "most_frequent_word": None, "frequency": 0, "least_frequent": 0}
     
     words_counter = Counter(clean_content_split)
     num_words = sum(words_counter.values())
@@ -59,6 +59,7 @@ if __name__ == "__main__":
         print("Number of unique words in the file: ", stats["unique_word_count"])
         print("Most frequent word in the file: ", stats["most_frequent_word"])
         print("Count of the most frequent word in the file: ", stats["frequency"])
+        print("Least frequent":, stats['least_frequent'])
     except FileNotFoundError:       ## Question what happens if the except is of a different kind than this one? 
         print(f"{args.filename} not found")
     
